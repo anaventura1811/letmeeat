@@ -58,6 +58,7 @@ function Login() {
             type="button"
             data-testid="login-submit-btn"
             onClick={ handleClick }
+            disabled={ isButtonDisabled }
           >
             Login
           </button>

@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 
-// import { fireEvent } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
 import App from '../App';
 
 import renderWithRouterAndProvider from './renderWithRouterAndProvider';
@@ -14,6 +14,7 @@ const PASSWORD_INPUT_TEST_ID = 'password-input';
 const VALID_EMAIL = 'teste@teste.com';
 const VALID_PASSWORD = '1234567';
 // const BUTTON_TEST_ID = 'login-submit-btn';
+
 
 describe('1 - Crie uma página inicial de login de acordo com os seguintes '
   + 'parâmetros:', () => {
@@ -113,25 +114,28 @@ describe('2 - Na tela de login são realizadas as seguintes verificações:', ()
 		}
 	);
 
-	// it(
-	// 	'O botão de login está habilitado quando um email e senha ' +
-	// 		'válidos são digitados nos campos do formulário',
-	// 	async () => {
-	// 		await act(async () => {
-	// 			await renderWithRouterAndProvider(<App />, '/');
+	it(
+		'O botão de login está habilitado quando um email e senha ' +
+			'válidos são digitados nos campos do formulário',
+		async () => {
+			await act(async () => {
+				await renderWithRouterAndProvider(<App />, '/');
 
-	// 			const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
-	// 			const password = screen.getByTestId(PASSWORD_INPUT_TEST_ID);
-  //       const button = screen.getByTestId(BUTTON_TEST_ID);
-        
-	// 			await userEvent.type(email, VALID_EMAIL);
-	// 			await userEvent.type(password, VALID_PASSWORD);
+				expect(screen.getByRole('button', { name: /Login/i })).toBeDisabled();
+
+				const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
+				const password = screen.getByTestId(PASSWORD_INPUT_TEST_ID);
+
+				await fireEvent.change(email, VALID_EMAIL);
+				await fireEvent.change(password, VALID_PASSWORD);
+
+				// const button = screen.getByTestId('login-submit-btn');
+				// expect(button).not.toBeDisabled();
 				
 
-	// 		  expect(button).not.toBeDisabled();
-	// 		});
-	// 	}
-	// );
+			});
+		}
+	);
 });
 
 // describe(

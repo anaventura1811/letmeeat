@@ -27,7 +27,7 @@ function App() {
 			/>
 			<Route
 				exact
-				path='/explorar/bebidas/ingredientes'
+				path='/explorar/drinks/ingredients'
 				render={(props) => <ExploreIngredients {...props} type='drinks' />}
 			/>
 			<Route

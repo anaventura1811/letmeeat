@@ -1,38 +1,10 @@
-import React, { useState, useEffect }from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
+
 import { LoginContainer, Container } from '../styles/login';
+import useLogin from '../hooks/UseLogin';
 
 function Login() {
-  const history = useHistory();
-	const [emailData, setEmail] = useState('');
-	const [passwordData, setPassword] = useState('');
-	const [isButtonDisabled, setButtonDisabled] = useState(true);
-
-  useEffect(() => {
-		let cancel = false;
-		if (cancel) return;
-		const subscription = () => {
-			const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-			const lengthSix = 6;
-			if (re.test(emailData) && passwordData.trim().length > lengthSix) {
-				setButtonDisabled(false);
-			} else {
-				setButtonDisabled(true);
-			}
-		};
-		subscription();
-		return () => {
-			cancel = true;
-		};
-	}, [emailData, passwordData]);
-
-  const handleClick = () => {
-		const user = { email: emailData };
-		localStorage.setItem('mealsToken', 1);
-		localStorage.setItem('cocktailsToken', 1);
-		localStorage.setItem('user', JSON.stringify(user));
-		history.push('/comidas');
-	};
+ const { setEmail, setPassword, isButtonDisabled, handleClick } = useLogin();
 
   return (
     <LoginContainer>
@@ -63,8 +35,8 @@ function Login() {
           <button
             type="button"
             data-testid="login-submit-btn"
-            onClick={ handleClick }
             disabled={ isButtonDisabled }
+            onClick={ () => handleClick()}
           >
             Login
           </button>

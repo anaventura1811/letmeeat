@@ -1,5 +1,6 @@
 import React, { useState, useEffect }from 'react';
 import { useHistory } from 'react-router-dom';
+import { LoginContainer, Container } from '../styles/login';
 
 function Login() {
   const history = useHistory();
@@ -34,26 +35,31 @@ function Login() {
 	};
 
   return (
-    <div>
+    <LoginContainer>
       <div className='page-grid'>
         <aside className='img-wrapper'></aside>
         <div />
         <div />
         <div className='separator' />
-        <div>
-          <input
-            type='text'
-            data-testid='email-input'
-            id='email'
-            placeholder="email"
-            onChange={ (ev) => setEmail(ev.target.value)}
-          />
-          <input
-            type="password"
-            data-testid="password-input"
-            id="password"
-            onChange={ (ev) => setPassword(ev.target.value)}
-          />
+        <Container>
+          <label htmlFor="email">
+            Email
+            <input
+              type='text'
+              data-testid='email-input'
+              id='email'
+              onChange={ (ev) => setEmail(ev.target.value)}
+            />
+          </label>
+          <label htmlFor="password">
+            Password
+            <input
+              type="password"
+              data-testid="password-input"
+              id="password"
+              onChange={ (ev) => setPassword(ev.target.value)}
+            />
+          </label>
           <button
             type="button"
             data-testid="login-submit-btn"
@@ -62,9 +68,9 @@ function Login() {
           >
             Login
           </button>
-        </div>
+        </Container>
       </div>
-    </div>
+    </LoginContainer>
 	);
 }
 

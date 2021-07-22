@@ -1,6 +1,5 @@
 import React from 'react';
 import CardContainer from './styles';
-import { AiFillStar } from 'react-icons/ai';
 
 function Card({ index, recipe }) {
   const recipeCategory = recipe.strAlcoholic || recipe.strCategory;
@@ -22,11 +21,7 @@ function Card({ index, recipe }) {
 						<p>{recipeCategory}</p>
 					</div>
 					<div className='rating'>
-						<AiFillStar />
-						<AiFillStar />
-						<AiFillStar />
-						<AiFillStar />
-						<AiFillStar />
+						
 					</div>
 				</div>
 			</div>

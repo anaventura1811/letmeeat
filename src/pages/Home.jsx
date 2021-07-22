@@ -6,6 +6,7 @@ import { ImSearch } from 'react-icons/im';
 import CardList from '../components/CardList';
 import useFetchRecipes from '../hooks/UseFetchRecipes';
 import useRecipes from '../hooks/UseRecipes';
+import CategoriesList from '../components/CategoriesList'
 
 const MEALS_URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 const DRINKS_URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
@@ -49,7 +50,7 @@ function Home({ type }) {
           <ImSearch size={ 30 } />
         </button>
       </Header>
-      { isActive ? <SearchBar type={ type } /> : '' }
+      { isActive ? <SearchBar type={ type } /> : <CategoriesList type={ type } /> }
       <CardList recipes={ recipes } type={ type } />
 			<Footer />
 		</div>

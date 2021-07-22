@@ -20,9 +20,7 @@ function CategoriesList({ type }) {
     const fetchCategories = async () => {
       const response = await fetch(fetchCategoriesURL);
       const data = await response.json();
-      const treatedData = data[type]
-        .slice(0, MAX_CATEGORIES)
-        .map((category) => category.strCategory);
+      const treatedData = data[type].slice(0, MAX_CATEGORIES).map((category) => category.strCategory);
       setCategories(treatedData);
     }
     fetchCategories();

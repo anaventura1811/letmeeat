@@ -36,7 +36,7 @@ const CardContainer = styled.div`
 		flex-wrap: nowrap;
 		font-size: 1.2rem;
 		justify-content: normal;
-		line-height: 0.1;
+		line-height: 1;
 		margin: 10px auto 6px;
 		z-index: 2;
 

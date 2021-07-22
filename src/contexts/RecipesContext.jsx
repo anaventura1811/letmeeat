@@ -14,6 +14,8 @@ function RecipesContextProvider(props) {
 
   const [isLoading, setIsLoading] = useState(true);
 
+  const [fetchRecipesContext, setFetchRecipesContext] = useState({});
+
   const fetchFilteredMealRecipes = async (endpoint, type) => {
     try {
 			const response = await fetch(endpoint);
@@ -127,6 +129,8 @@ function RecipesContextProvider(props) {
 		fetchFilteredMealRecipes,
 		isLoading,
 		setIsLoading,
+		fetchRecipesContext,
+		setFetchRecipesContext,
 	};
 
   return (

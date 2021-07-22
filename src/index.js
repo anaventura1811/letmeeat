@@ -5,13 +5,17 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import UserContextProvider from './contexts/UserContext';
+import RecipesContextProvider from './contexts/RecipesContext';
+
 
 
 ReactDOM.render(
   <BrowserRouter>
     <React.StrictMode>
       <UserContextProvider>
-        <App />
+        <RecipesContextProvider>
+          <App />
+        </RecipesContextProvider>
       </UserContextProvider>
     </React.StrictMode>
   </BrowserRouter>,

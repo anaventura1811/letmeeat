@@ -183,7 +183,7 @@ describe(
 					expect(localStorage.getItem('cocktailsToken')).toBe('1');
 					expect(localStorage.getItem('mealsToken')).toBe('1');
 					expect(localStorage.getItem('user')).toBe('{"email":"teste@teste.com"}');
-				})
+				});
 			}
 		);
 	}

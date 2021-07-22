@@ -1,17 +1,22 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import useRecipes from '../../hooks/UseRecipes';
 import SearchBarContainer from './styles';
 
 function SearchBar({ type }) {
-  const [inputSearch, setInputSearch] = useState('');
-  const [radioValue, setRadioValue] = useState('');
-  const { searchBarFilters, setSearchBarFilters } = useRecipes();
+  const {
+		searchBarFilters,
+		setSearchBarFilters,
+		radioValue,
+		setRadioValue,
+		inputSearch,
+		setInputSearch,
+	} = useRecipes();
 
    // configura o onChange dos radio inputs
   const handleChange = useCallback((event) => {
     setRadioValue(event.target.value);
-  }, []);
+  }, [setRadioValue]);
 
     // submit do botão de busca, coloca os filtros num array que servirá de trigger para o fetch no contexto
   const handleSubmit = useCallback((ev) => {

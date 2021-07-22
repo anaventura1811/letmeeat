@@ -16,6 +16,9 @@ function RecipesContextProvider(props) {
 
   const [fetchRecipesContext, setFetchRecipesContext] = useState({});
 
+  const [inputSearch, setInputSearch] = useState('');
+	const [radioValue, setRadioValue] = useState('');
+
   const fetchFilteredMealRecipes = async (endpoint, type) => {
     try {
 			const response = await fetch(endpoint);
@@ -131,6 +134,10 @@ function RecipesContextProvider(props) {
 		setIsLoading,
 		fetchRecipesContext,
 		setFetchRecipesContext,
+		inputSearch,
+		setInputSearch,
+		radioValue,
+		setRadioValue,
 	};
 
   return (

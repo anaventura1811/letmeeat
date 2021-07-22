@@ -11,8 +11,8 @@ function UserContextProvider({ children }) {
 	const [isButtonDisabled, setDisabled] = useState(true);
 
 	useEffect(() => {
-		// let cancel = false;
-		// if (cancel) return;
+		let cancel = false;
+		if (cancel) return;
 		const subscription = () => {
 			const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 			const lengthSix = 6;
@@ -23,10 +23,10 @@ function UserContextProvider({ children }) {
 			}
 		};
 		subscription();
-		// return () => {
-		// 	cancel = true;
-		// };
-	}, [emailData, passwordData, isButtonDisabled]);
+		return () => {
+			cancel = true;
+		};
+	}, [emailData, passwordData]);
 
 	const handleClick = () => {
 		const user = { email: emailData };

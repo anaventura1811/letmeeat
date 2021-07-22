@@ -3,7 +3,6 @@ import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 
-import { fireEvent } from '@testing-library/react';
 import App from '../App';
 
 import renderWithRouterAndProvider from './renderWithRouterAndProvider';
@@ -13,7 +12,7 @@ const EMAIL_INPUT_TEST_ID = 'email-input';
 const PASSWORD_INPUT_TEST_ID = 'password-input';
 const VALID_EMAIL = 'teste@teste.com';
 const VALID_PASSWORD = '1234567';
-// const BUTTON_TEST_ID = 'login-submit-btn';
+const BUTTON_TEST_ID = 'login-submit-btn';
 
 
 describe('1 - Crie uma página inicial de login de acordo com os seguintes '
@@ -125,67 +124,69 @@ describe('2 - Na tela de login são realizadas as seguintes verificações:', ()
 
 				const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
 				const password = screen.getByTestId(PASSWORD_INPUT_TEST_ID);
-
-				await fireEvent.change(email, VALID_EMAIL);
-				await fireEvent.change(password, VALID_PASSWORD);
-
-				// const button = screen.getByTestId('login-submit-btn');
-				// expect(button).not.toBeDisabled();
 				
-
+				await userEvent.type(email, VALID_EMAIL);
+				await userEvent.type(password, VALID_PASSWORD);
+				
+				
+				
 			});
+			await act(async () => {
+				const button = screen.getByTestId('login-submit-btn');
+				expect(button).not.toBeDisabled();
+			})
 		}
 	);
 });
 
-// describe(
-// 	'3 - Verifica se o email da pessoa usuária é salvo no Local Storage ' +
-// 		'e se a pessoa usuária é redirecionada para a tela principal após o login',
-// 	() => {
-// 		it("A rota deve ser mudada para '/comidas' após o clique no botão", async () => {
-// 			await act(async () => {
-// 				const { history } = await renderWithRouterAndProvider(<App />, '/');
+describe(
+	'3 - Verifica se o email da pessoa usuária é salvo no Local Storage ' +
+		'e se a pessoa usuária é redirecionada para a tela principal após o login',
+	() => {
+		it("A rota deve ser mudada para '/comidas' após o clique no botão", async () => {
+			const { history } = await renderWithRouterAndProvider(<Login />, '/');
+			const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
+			const password = screen.getByTestId(PASSWORD_INPUT_TEST_ID);
+			
+			await act(async () => {
+				await userEvent.type(email, VALID_EMAIL);
+				await userEvent.type(password, VALID_PASSWORD);
+			});
+			
+			await act(async () =>{ 
+				const button = screen.getByTestId(BUTTON_TEST_ID);
+				await userEvent.click(button);
+				expect(history.location.pathname).toBe('/meals');
+			}); 
+		});
 
-// 				const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
-// 				const password = screen.getByTestId(PASSWORD_INPUT_TEST_ID);
-// 				const button = screen.getByTestId(BUTTON_TEST_ID);
+		it(
+			'O email da pessoa usuária e dois tokens são salvos '
+      + 'corretamente no Local Storage',
+			async () => {
+				await act(async () => {
+					await renderWithRouterAndProvider(<Login />, '/');
 
-// 			  await userEvent.type(email, VALID_EMAIL);
-// 				await userEvent.type(password, VALID_PASSWORD);
-// 				await fireEvent.click(button);
+					const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
+					const password = screen.getByTestId(PASSWORD_INPUT_TEST_ID);
+					const button = screen.getByTestId(BUTTON_TEST_ID);
 
-				
-//         expect(history.location.pathname).toMatch('/meals');
-// 			});
-// 		});
-
-// 		it(
-// 			'O email da pessoa usuária e dois tokens são salvos '
-//       + 'corretamente no Local Storage',
-// 			async () => {
-// 				await act(async () => {
-// 					await renderWithRouterAndProvider(<Login />, '/');
-
-// 					const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
-// 					const password = screen.getByTestId(PASSWORD_INPUT_TEST_ID);
-// 					const button = screen.getByTestId(BUTTON_TEST_ID);
-
-// 					const cocktailsTokenStorage = localStorage.getItem('cocktailsToken');
-// 					const mealsTokenStorage = localStorage.getItem('mealsToken');
-// 					const userInfo = localStorage.getItem('user');
           
-// 					await userEvent.type(email, VALID_EMAIL);
-// 					await userEvent.type(password, VALID_PASSWORD);
-// 					await fireEvent.click(button);
+					await userEvent.type(email, VALID_EMAIL);
+					await userEvent.type(password, VALID_PASSWORD);
+					await userEvent.click(button);
           
-
-// 					expect(cocktailsTokenStorage).toBe('1');
-// 					expect(mealsTokenStorage).toBe('1');
-// 					expect(userInfo).toBe('{"email":"teste@teste.com"}');
-// 				});
-// 			}
-// 		);
-// 	}
-// );
+					
+				});
+		
+				await act(async () => {
+					expect(localStorage.getItem('cocktailsToken')).toBe('1');
+					expect(localStorage.getItem('mealsToken')).toBe('1');
+					expect(localStorage.getItem('user')).toBe('{"email":"teste@teste.com"}');
+				})
+			}
+		);
+	}
+);
 
 // Source: https://reactjs.org/docs/test-utils.html#act

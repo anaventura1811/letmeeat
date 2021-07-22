@@ -1,11 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import useRecipes from '../../hooks/UseRecipes';
+import SearchBarContainer from './styles';
 
 function SearchBar({ type }) {
   const [inputSearch, setInputSearch] = useState('');
   const [radioValue, setRadioValue] = useState('');
-  const { searchBarFilters, setSearchBarFilters, setFilteredRecipes} = useRecipes();
+  const { searchBarFilters, setSearchBarFilters } = useRecipes();
 
    // configura o onChange dos radio inputs
   const handleChange = useCallback((event) => {
@@ -26,7 +27,7 @@ function SearchBar({ type }) {
   }, [inputSearch, radioValue, searchBarFilters, setSearchBarFilters]);
 
   return (
-    <div>
+    <SearchBarContainer>
       <input
         type="text"
         placeholder="search recipe"
@@ -44,7 +45,7 @@ function SearchBar({ type }) {
             data-testid="ingredient-search-radio"
             onChange={ (ev) => handleChange(ev) }
           />
-          Ingredient
+          ingredient
         </label>
         <label htmlFor="name">
           <input
@@ -55,7 +56,7 @@ function SearchBar({ type }) {
             data-testid="name-search-radio"
             onChange={ (ev) => handleChange(ev) }
           />
-          Name
+          name
         </label>
         <label htmlFor="first-letter">
           <input
@@ -66,7 +67,7 @@ function SearchBar({ type }) {
             data-testid="first-letter-search-radio"
             onChange={ (ev) => handleChange(ev) }
           />
-          First letter
+          first letter
         </label>
       </form>
       <div className="btn-container">
@@ -75,10 +76,10 @@ function SearchBar({ type }) {
           data-testid="exec-search-btn"
           onClick={(ev) => handleSubmit(ev) }
         >
-          Search
+          search
         </button>
       </div>
-    </div>
+    </SearchBarContainer>
   )
 }
 

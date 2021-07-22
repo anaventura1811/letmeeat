@@ -14,7 +14,7 @@ import RecipeInProgress from './pages/RecipeInProgress';
 
 function App() {
   return (
-		<Switch>
+		<>
 			<ToastContainer
 				position='top-center'
 				autoClose={5000}
@@ -26,6 +26,7 @@ function App() {
 				draggable
 				pauseOnHover
 			/>
+		<Switch>
 			<Route path='/' exact component={Login} />
 			<Route exact path='/meals' render={(props) => <Home {...props} type='meals' />} />
 			<Route exact path='/drinks' render={(props) => <Home {...props} type='drinks' />} />
@@ -77,6 +78,7 @@ function App() {
 				render={(props) => <RecipeInProgress {...props} type='drinks' />}
 			/>
 		</Switch>
+		</>
 	);
 }
 

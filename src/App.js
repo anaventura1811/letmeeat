@@ -10,10 +10,22 @@ import Login from './pages/Login';
 import Profile from './pages/Profile';
 import RecipeDetails from './pages/RecipeDetails';
 import RecipeInProgress from './pages/RecipeInProgress';
+ import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
 		<Switch>
+			<ToastContainer
+				position='top-center'
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+			/>
 			<Route path='/' exact component={Login} />
 			<Route exact path='/meals' render={(props) => <Home {...props} type='meals' />} />
 			<Route exact path='/drinks' render={(props) => <Home {...props} type='drinks' />} />

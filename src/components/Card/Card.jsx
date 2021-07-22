@@ -1,4 +1,5 @@
 import React from 'react';
+import CardContainer from './styles';
 
 function Card({ index, recipe }) {
   // const recipeCategory = recipe.strAlcoholic || recipe.strCategory;
@@ -6,7 +7,7 @@ function Card({ index, recipe }) {
   const recipeThumb = recipe.strMealThumb || recipe.strDrinkThumb;
   
   return (
-    <div>
+    <CardContainer>
       <div data-testid={ `${index}-recipe-card` }>
         <div className="img-wrapper">
           <img
@@ -20,7 +21,7 @@ function Card({ index, recipe }) {
         </div>
       </div>
       
-    </div>
+    </CardContainer>
   );
 }
 

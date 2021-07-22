@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 export const RecipesContext = createContext({});
 
-const MAX_RECIPES = 12;
+const MAX_RECIPES = 18;
 function RecipesContextProvider(props) {
   const { children } = props;
 

@@ -23,7 +23,7 @@ function useFetchRecipes(type) {
 
 				const limitedData = {
 					...data,
-					[type]: data[type].slice(0, MAX_RECIPES),
+					[type]: data[type].slice(0, MAX_RECIPES).reverse(),
 				};
 
 				setFetchRecipesContext(limitedData);

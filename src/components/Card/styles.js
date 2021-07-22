@@ -32,11 +32,23 @@ const CardContainer = styled.div`
 		align-content: normal;
 		align-items: normal;
 		display: flex;
+		flex-direction: column;
 		flex-wrap: nowrap;
-		font-size: 1rem;
+		font-size: 1.2rem;
 		justify-content: normal;
+		line-height: 0.1;
 		margin: 10px auto 6px;
 		z-index: 2;
+
+		.category {
+			color: #a6a6a6;
+			font-size: 0.9rem;
+			font-weight: 500;
+			justify-self: center;
+			align-self: center;
+			text-transform: uppercase;
+      margin-bottom: 10px;
+		}
 	}
 
 	@media only screen and (max-width: 767px) {

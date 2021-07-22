@@ -1,28 +1,37 @@
 import React from 'react';
 import CardContainer from './styles';
+import { AiFillStar } from 'react-icons/ai';
 
 function Card({ index, recipe }) {
-  // const recipeCategory = recipe.strAlcoholic || recipe.strCategory;
+  const recipeCategory = recipe.strAlcoholic || recipe.strCategory;
   const recipeName = recipe.strMeal || recipe.strDrink;
   const recipeThumb = recipe.strMealThumb || recipe.strDrinkThumb;
   
   return (
-    <CardContainer>
-      <div data-testid={ `${index}-recipe-card` }>
-        <div className="img-wrapper">
-          <img
-            data-testid={ `${index}-card-img` }
-            src={ recipeThumb }
-            alt="Delicious food/drink"
-          />
-        </div>
-        <div className="card-info">
-          <p data-testid={`${index}-card-name`}>{ recipeName }</p>
-        </div>
-      </div>
-      
-    </CardContainer>
-  );
+		<CardContainer>
+			<div data-testid={`${index}-recipe-card`}>
+				<div className='img-wrapper'>
+					<img data-testid={`${index}-card-img`} src={recipeThumb} alt='Delicious food/drink' />
+				</div>
+				<div className='card-info'>
+					<div className='recipe-name'>
+						<p data-testid={`${index}-card-name`}>{recipeName}</p>
+					</div>
+					<div />
+					<div className='category'>
+						<p>{recipeCategory}</p>
+					</div>
+					<div className='rating'>
+						<AiFillStar />
+						<AiFillStar />
+						<AiFillStar />
+						<AiFillStar />
+						<AiFillStar />
+					</div>
+				</div>
+			</div>
+		</CardContainer>
+	);
 }
 
 export default Card;

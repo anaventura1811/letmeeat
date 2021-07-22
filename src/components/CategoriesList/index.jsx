@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import useFetchRecipes from '../../hooks/UseFetchRecipes';
+import CategoriesListContainer from './styles';
 
 
 const mealsCategoriesEndpoint = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
@@ -52,7 +53,7 @@ function CategoriesList({ type }) {
   if (categories.length === 0) return 'Loading categories...';
 
   return (
-    <div>
+    <CategoriesListContainer>
       { categories.map((category, index) => (
         <button
           type="button"
@@ -71,7 +72,7 @@ function CategoriesList({ type }) {
         All
       </button>
       
-    </div>
+    </CategoriesListContainer>
   )
 }
 

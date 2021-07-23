@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { formattingMeasuresAndIngredients } from '../../helpers/helperFunctions';
 import useRecipes from '../../hooks/UseRecipes';
+import Container from './styles';
 
 function RecipeIngredientsInProgress({ recipe, type, id }) {
   const [checkedBox, setCheckedBox] = useState([]);
@@ -152,7 +153,7 @@ function RecipeIngredientsInProgress({ recipe, type, id }) {
   }, [id, type]);
 
   return (
-    <div className="ing">
+    <Container className="ing">
       { recipeInProgress && ingredients.map((element, index) => (
         <label
           htmlFor={ element }
@@ -176,7 +177,7 @@ function RecipeIngredientsInProgress({ recipe, type, id }) {
           { element }
         </label>))}
       
-    </div>
+    </Container>
   )
 }
 

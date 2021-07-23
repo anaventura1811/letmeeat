@@ -158,7 +158,7 @@ const Container = styled.div`
 	}
 
 	button {
-		position: fixed;
+		position: relative;
 	}
 
 	.icon-btn {

@@ -6,20 +6,21 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import UserContextProvider from './contexts/UserContext';
 import RecipesContextProvider from './contexts/RecipesContext';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
 ReactDOM.render(
-  <BrowserRouter>
-    <React.StrictMode>
-      <UserContextProvider>
-        <RecipesContextProvider>
-          <App />
-        </RecipesContextProvider>
-      </UserContextProvider>
-    </React.StrictMode>
-  </BrowserRouter>,
-  document.getElementById('root')
+	<BrowserRouter>
+		<React.StrictMode>
+			<UserContextProvider>
+				<RecipesContextProvider>
+					<App />
+				</RecipesContextProvider>
+			</UserContextProvider>
+		</React.StrictMode>
+	</BrowserRouter>,
+	document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

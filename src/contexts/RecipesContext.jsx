@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 export const RecipesContext = createContext({});
 
-const MAX_RECIPES = 18;
+const MAX_RECIPES = 20;
 const MAX_LENGTH = 6;
 
 function RecipesContextProvider(props) {
@@ -75,26 +75,12 @@ function RecipesContextProvider(props) {
 			setFilteredRecipes(formattedData[type]);
 		} catch (err) {
 			console.log(err);
-			toast.error('Sorry, no recipe found', {
-				position: 'top-center',
-				autoClose: 5000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-			});
+			toast.error('Sorry, no recipe found');
 		}
 	};
 
 	const alertMessage = () => {
-		toast.error('Your search must have only one(1) character', {
-			position: 'top-center',
-			autoClose: 5000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-		});
+		toast.error('Your search must have only one(1) character');
 	};
 
 	const handleMealFilterType = (filterType, query, type) => {

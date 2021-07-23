@@ -48,6 +48,7 @@ function CategoriesList({ type }) {
     return setFetchUrl('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
   };
 
+
   if (categories.length === 0) return 'Loading categories...';
 
   return (

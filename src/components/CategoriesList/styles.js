@@ -6,9 +6,10 @@ const CategoriesListContainer = styled.div`
 	flex-wrap: wrap;
 	gap: 0.5rem;
 	justify-content: space-evenly;
-	margin: 0 auto;
+	margin: 10px auto;
 	max-width: 600px;
 	padding: 0 12px;
+	/* overflow-x: auto; */
 
 	button {
 		align-items: center;

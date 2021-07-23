@@ -29,19 +29,19 @@ function Card({ index, recipe }) {
                 className="card-info-paragraph"
               >
                 { recipeName }
-                <span>
+                {/* <span>
                   <img
                     src={ ''}
                     alt="logo letmeEat"
                   />
-                </span>
+                </span> */}
               </span>
               <br />
               <div className="recipe-category">
                 <p>{ recipeCategory }</p>
               </div>
             </div>
-        </div>
+          </div>
         }
       </RecommendationCardsContainer>
     );

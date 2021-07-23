@@ -13,12 +13,8 @@ function StarRating() {
         const ratingValue = index + 1;
 
         return (
-					<label htmlFor=''>
-						<input
-							type='radio'
-							name='rating'
-							value={ratingValue}
-              />
+					<label key={index} htmlFor=''>
+						<input type='radio' name='rating' value={ratingValue} />
 						<FaStar
 							onClick={() => setRating(ratingValue)}
 							className={star}

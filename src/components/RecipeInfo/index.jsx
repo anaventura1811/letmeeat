@@ -73,38 +73,39 @@ function RecipeInfo(props) {
 		<div className='componente1'>
 			<div className='recipe-info'>
         <div className="recipe-details">
-          <div className="primary-info-text">
-            <div className="primary-info-left-wrapper">
-              <h1 data-testid='recipe-title' className='recipe-title'>
-                {recipeName}
-              </h1>
-              <div>
-                <h3 data-testid='recipe-category'>{recipeCategory}</h3>
-              </div>
-              <StarRating />
-            </div>
+          <h1 data-testid='recipe-title' className='recipe-title'>
+            {recipeName}
+          </h1>
+          <div>
+            <h3 data-testid='recipe-category'>{recipeCategory}</h3>
           </div>
-            <div className='ingredients-count-summary'>
-              <span id="ingredient-length">{ingredients.length}</span>
-              {' '}
-              <span>Ingredients</span>
-            </div>
-            <div className='icons'>
-              <FiShare2
-                size={30}
-                color={copyToClipboard ? 'green' : ''}
-                onClick={handleCopyToClipboard}
-                data-testid='share-btn'
-              />
-              <FaHeart
-                size={30}
-                color={isFavorite ? 'red' : '#e4e5e9'}
-                onClick={handleAddFavoriteRecipe}
-              />
-            </div>
+          <div id="rating">
+            <StarRating />
+          </div>
+          <div className='ingredients-count-summary'>
+            <span id="ingredient-length">{ingredients.length}</span>
+            <span id="ingredient">{ingredients.length > 1 ? 'Ingredients' : 'Ingredient'}</span>
+          </div>
+          <div className='icons'>
+            <FiShare2
+              size={30}
+              color={copyToClipboard ? 'green' : ''}
+              onClick={handleCopyToClipboard}
+              data-testid='share-btn'
+            />
+            <FaHeart
+              size={30}
+              color={isFavorite ? 'red' : '#e4e5e9'}
+              onClick={handleAddFavoriteRecipe}
+            />
+          </div>
         </div>
         <div className='img-container'>
-          <img src={recipeThumb} alt='Foto da receita' data-testid='recipe-photo' />
+          <img
+            src={recipeThumb}
+            alt={ `Delicious ${recipeName}`}
+            data-testid='recipe-photo'
+          />
         </div>
 			</div>
 			<div className='container'>

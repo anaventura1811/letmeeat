@@ -62,15 +62,17 @@ function RecipeInProgress({ type }) {
 			/>
 			<RecipeIngredientsInProgress recipe={recipe} type={type} id={id} />
 			<RecipeInstructions recipe={recipe} />
-			<button
-				type='submit'
-				data-testid='finish-recipe-btn'
-				className='recipe-btn'
+      
+      <button
+        type='submit'
+        data-testid='finish-recipe-btn'
+        className='recipe-btn'
         disabled={ isDisabled }
-				onClick={(ev) => handleRedirectToDoneRecipes(ev)}
-			>
-				Finalizar receita
-			</button>
+        onClick={(ev) => handleRedirectToDoneRecipes(ev)}
+      >
+        Finish Recipe
+      </button>
+
 		</RecipeInProgressContainer>
 	);
 }

@@ -79,7 +79,9 @@ function RecipeDetails({ type }) {
 				''
 			)}
 			<Carousel recipeRecommendations={recommendations} type={ type } />
+      
       <InitOrContinueButton type={ type } />
+  
 		</Container>
 	);
 }

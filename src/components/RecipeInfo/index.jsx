@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { FaHeart } from 'react-icons/fa';
 import { FiShare2 } from 'react-icons/fi';
+import { toast } from 'react-toastify';
 import handleSetFavoritesToLocalStorage from '../../helpers/localStorageService';
 
 import { getCopyToClipboard } from '../../helpers/helperFunctions';
@@ -49,6 +50,7 @@ function RecipeInfo(props) {
   const handleCopyToClipboard = () => {
 		getCopyToClipboard(type, id);
 		setCopyToClipboard(true);
+    toast.success('Copied!');
 		setTimeout(() => {
 			setCopyToClipboard(false);
 		}, THREE_SECONDS);
@@ -78,7 +80,6 @@ function RecipeInfo(props) {
 					<h3 data-testid='recipe-category'>{recipeCategory}</h3>
 				</div>
 				<div className='icons'>
-					{copyToClipboard ? <span>Copied!</span> : ''}
 					<FiShare2
 						size={30}
 						color={copyToClipboard ? 'green' : ''}

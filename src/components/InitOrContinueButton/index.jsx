@@ -37,7 +37,7 @@ function InitOrContinueButton({ type }) {
       className="recipe-btn"
       onClick={ (ev) => handleClick(ev) }
     >
-      { isRecipeInProgress ? 'Continuar Receita' : 'Iniciar Receita'}
+      { isRecipeInProgress ? 'Continue Recipe' : 'Start Recipe'}
     </button>
   );
 }

@@ -6,7 +6,7 @@ import Container from './styles';
 function RecipeIngredientsInProgress({ recipe, type, id }) {
   const [checkedBox, setCheckedBox] = useState([]);
 
-  const { recipeInProgress, setRecipeInProgress } = useRecipes();
+  const { recipeInProgress, setRecipeInProgress, setIsDisabled } = useRecipes();
 
   const keysAndValues = Object.entries(recipe);
   const formatting = formattingMeasuresAndIngredients(keysAndValues);
@@ -152,8 +152,19 @@ function RecipeIngredientsInProgress({ recipe, type, id }) {
     };
   }, [id, type]);
 
+  useEffect(() => {
+    let cancel = false;
+    if (cancel) return;
+    if (checkedBox.length === ingredients.length) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  }, [checkedBox.length, ingredients.length, setIsDisabled])
+
   return (
     <Container className="ing">
+      <h2>Ingredients</h2>
       { recipeInProgress && ingredients.map((element, index) => (
         <label
           htmlFor={ element }

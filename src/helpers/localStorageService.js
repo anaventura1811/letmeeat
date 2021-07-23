@@ -80,7 +80,7 @@ export const handleSetRecipesInProgressToLocalStorage = (key, recipeObjt, type, 
 export const handleDoneRecipesLS = (id, type, singleRecipe) => {
 	const doneRecipesObjt = {
 		id,
-		type: type === 'drinks' ? 'bebida' : 'comida',
+		type: type === 'drinks' ? 'drink' : 'meal',
 		area: singleRecipe.strArea || '',
 		category: singleRecipe.strCategory || '',
 		alcoholicOrNot: singleRecipe.strAlcoholic || '',

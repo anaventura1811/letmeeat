@@ -4,6 +4,7 @@ import RecipeInfo from '../components/RecipeInfo';
 import { useParams } from 'react-router-dom';
 import useRecipes from '../hooks/UseRecipes';
 import Container from '../styles/recipeDetails';
+import RecipeIngredients from '../components/RecipeIngredients';
 
 const endpointRecipes = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 const endpointCocktails = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
@@ -67,7 +68,8 @@ function RecipeDetails({ type }) {
         recipe={ singleRecipe }
         recipeCategory={ renderCategory }
       />
-    <StarRating />
+      <StarRating />
+      <RecipeIngredients recipe={ singleRecipe } />
     </Container>
   )
 }

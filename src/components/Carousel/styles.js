@@ -14,7 +14,7 @@ const CarouselWrapper = styled.div`
 
 	/* max-width: calc(100vw); */
 
-	/* scroll-behavior: smooth; */
+	scroll-behavior: smooth;
 	width: 100%;
 
 	.card-grid {

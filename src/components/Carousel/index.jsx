@@ -21,7 +21,12 @@ function Carousel({ recipeRecommendations, type }) {
 
   return (
     <CarouselWrapper>
-      <CarouselProvider>
+      <CarouselProvider
+        naturalSlideHeight={ 400 }
+        naturalSlideWidth={ 400 }
+        visibleSlides={ 2 }
+        totalSlides={ 6 }
+      >
         <div className="card-grid">
           <Slider>
             <CarouselCardGrid recipes={ recipes } type={ currentRecommendation } />

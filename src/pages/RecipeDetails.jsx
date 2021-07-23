@@ -7,6 +7,7 @@ import Container from '../styles/recipeDetails';
 import RecipeIngredients from '../components/RecipeIngredients';
 import RecipeInstructions from '../components/RecipeInstructions';
 import MealVideo from '../components/MealVideo';
+import Carousel from '../components/Carousel';
 
 const endpointRecipes = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 const endpointCocktails = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
@@ -62,25 +63,25 @@ function RecipeDetails({ type }) {
   
   const renderCategory = type === 'drinks' ? isAlchooholic : recipeCategory;
   return (
-    <Container>
-      <RecipeInfo 
-        recipeThumb={ recipeThumb }
-        recipeName={ recipeName} 
-        type={ type }
-        recipe={ singleRecipe }
-        recipeCategory={ renderCategory }
-      />
-      <StarRating />
-      <RecipeIngredients recipe={ singleRecipe } />
-      <RecipeInstructions recipe={ singleRecipe } />
-      { type === 'meals' ? (
-        <MealVideo
-          youTubeVideo={ youTubeVideo.substring(magicNumber) }
-          title={ recipeMealName }
-        />
-      ) : ''}
-    </Container>
-  )
+		<Container>
+			<RecipeInfo
+				recipeThumb={recipeThumb}
+				recipeName={recipeName}
+				type={type}
+				recipe={singleRecipe}
+				recipeCategory={renderCategory}
+			/>
+			<StarRating />
+			<RecipeIngredients recipe={singleRecipe} />
+			<RecipeInstructions recipe={singleRecipe} />
+			{type === 'meals' ? (
+				<MealVideo youTubeVideo={youTubeVideo.substring(magicNumber)} title={recipeMealName} />
+			) : (
+				''
+			)}
+			<Carousel recipeRecommendations={recommendations} type={ type } />
+		</Container>
+	);
 }
 
 export default RecipeDetails;

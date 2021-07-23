@@ -52,7 +52,7 @@ function RecipesContextProvider(props) {
 			const data = await response.json();
 			const formattingData = {
 				...data,
-				[currentRecommendation]: data[currentRecommendation].slice(0, MAX_LENGTH),
+				[currentRecommendation]: data[currentRecommendation].slice(0, MAX_LENGTH).reverse(),
 			};
 			if (formattingData[currentRecommendation] !== null) {
 				setRecomendations(formattingData[currentRecommendation]);

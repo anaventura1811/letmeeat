@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import StarRating from '../components/StarRating';
 import RecipeInfo from '../components/RecipeInfo';
 import { useParams } from 'react-router-dom';
 import useRecipes from '../hooks/UseRecipes';
@@ -72,7 +71,6 @@ function RecipeDetails({ type }) {
 				recipe={singleRecipe}
 				recipeCategory={renderCategory}
 			/>
-			<StarRating />
 			<RecipeIngredients recipe={singleRecipe} />
 			<RecipeInstructions recipe={singleRecipe} />
 			{type === 'meals' ? (

@@ -4,9 +4,10 @@ import { useParams } from 'react-router-dom';
 import { FaHeart } from 'react-icons/fa';
 import { FiShare2 } from 'react-icons/fi';
 import { toast } from 'react-toastify';
+import StarRating from '../StarRating';
 import handleSetFavoritesToLocalStorage from '../../helpers/localStorageService';
 
-import { getCopyToClipboard } from '../../helpers/helperFunctions';
+import { formattingMeasuresAndIngredients, getCopyToClipboard } from '../../helpers/helperFunctions';
 
 const THREE_SECONDS = 3000;
 
@@ -18,6 +19,9 @@ function RecipeInfo(props) {
 		const recipeId = type === 'meals' ? recipe.idMeal : recipe.idDrink;
 		const recipeType = type === 'meals' ? 'meals' : 'drinks';
 
+  const keysAndValues = Object.entries(recipe);
+  const formatting = formattingMeasuresAndIngredients(keysAndValues);
+  const { ingredients } = formatting;
 
   const recipesObject = {
 		id: recipeId,
@@ -50,7 +54,7 @@ function RecipeInfo(props) {
   const handleCopyToClipboard = () => {
 		getCopyToClipboard(type, id);
 		setCopyToClipboard(true);
-    toast.success('Copied!');
+    toast.success('✔️ Copied to clipboard!');
 		setTimeout(() => {
 			setCopyToClipboard(false);
 		}, THREE_SECONDS);
@@ -68,30 +72,42 @@ function RecipeInfo(props) {
 	return (
 		<div className='componente1'>
 			<div className='recipe-info'>
-				<h2 data-testid='recipe-title' className='recipe-title'>
-					{recipeName}
-				</h2>
-			</div>
-			<div className='img-container'>
-				<img src={recipeThumb} alt='Foto da receita' data-testid='recipe-photo' />
+        <div className="recipe-details">
+          <div className="primary-info-text">
+            <div className="primary-info-left-wrapper">
+              <h1 data-testid='recipe-title' className='recipe-title'>
+                {recipeName}
+              </h1>
+              <div>
+                <h3 data-testid='recipe-category'>{recipeCategory}</h3>
+              </div>
+              <StarRating />
+            </div>
+          </div>
+            <div className='ingredients-count-summary'>
+              <span id="ingredient-length">{ingredients.length}</span>
+              {' '}
+              <span>Ingredients</span>
+            </div>
+            <div className='icons'>
+              <FiShare2
+                size={30}
+                color={copyToClipboard ? 'green' : ''}
+                onClick={handleCopyToClipboard}
+                data-testid='share-btn'
+              />
+              <FaHeart
+                size={30}
+                color={isFavorite ? 'red' : '#e4e5e9'}
+                onClick={handleAddFavoriteRecipe}
+              />
+            </div>
+        </div>
+        <div className='img-container'>
+          <img src={recipeThumb} alt='Foto da receita' data-testid='recipe-photo' />
+        </div>
 			</div>
 			<div className='container'>
-				<div>
-					<h3 data-testid='recipe-category'>{recipeCategory}</h3>
-				</div>
-				<div className='icons'>
-					<FiShare2
-						size={30}
-						color={copyToClipboard ? 'green' : ''}
-						onClick={handleCopyToClipboard}
-						data-testid='share-btn'
-					/>
-					<FaHeart
-						size={30}
-						color={isFavorite ? 'red' : '#e4e5e9'}
-						onClick={handleAddFavoriteRecipe}
-					/>
-				</div>
 			</div>
 		</div>
 	);

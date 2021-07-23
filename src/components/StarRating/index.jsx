@@ -17,7 +17,7 @@ function StarRating() {
 						<input type='radio' name='rating' value={ratingValue} />
 						<FaStar
 							onClick={() => setRating(ratingValue)}
-							className={star}
+							className="star"
 							color={ratingValue <= (hover || rating) ? '#ffc107' : '#e4e5e9'}
 							size={20}
 							onMouseEnter={() => setHover(ratingValue)}

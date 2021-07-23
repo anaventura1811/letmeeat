@@ -3,6 +3,7 @@ import StarRating from '../components/StarRating';
 import RecipeInfo from '../components/RecipeInfo';
 import { useParams } from 'react-router-dom';
 import useRecipes from '../hooks/UseRecipes';
+import Container from '../styles/recipeDetails';
 
 const endpointRecipes = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 const endpointCocktails = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
@@ -58,10 +59,7 @@ function RecipeDetails({ type }) {
   
   const renderCategory = type === 'drinks' ? isAlchooholic : recipeCategory;
   return (
-    <div>
-      <h1>
-        Detalhes da receita
-      </h1>
+    <Container>
       <RecipeInfo 
         recipeThumb={ recipeThumb }
         recipeName={ recipeName} 
@@ -70,7 +68,7 @@ function RecipeDetails({ type }) {
         recipeCategory={ renderCategory }
       />
     <StarRating />
-    </div>
+    </Container>
   )
 }
 

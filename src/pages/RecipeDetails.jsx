@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import useRecipes from '../hooks/UseRecipes';
 import Container from '../styles/recipeDetails';
 import RecipeIngredients from '../components/RecipeIngredients';
+import RecipeInstructions from '../components/RecipeInstructions';
 
 const endpointRecipes = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 const endpointCocktails = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
@@ -70,6 +71,7 @@ function RecipeDetails({ type }) {
       />
       <StarRating />
       <RecipeIngredients recipe={ singleRecipe } />
+      <RecipeInstructions recipe={ singleRecipe } />
     </Container>
   )
 }

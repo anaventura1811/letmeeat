@@ -10,15 +10,18 @@ function MealVideo({ youTubeVideo, title }) {
   }
 
   return (
-    <iframe
-      title={ title }
-      data-testid="video"
-      id="ytplayer"
-      type="text/html"
-      width="640"
-      height="360"
-      src={ `http://www.youtube.com/embed/${youTubeVideo}`}
-    />
+    <>
+    <h4>Wanna watch ? Check it out!</h4>
+      <iframe
+        title={ title }
+        data-testid="video"
+        id="ytplayer"
+        type="text/html"
+        width="640"
+        height="360"
+        src={ `http://www.youtube.com/embed/${youTubeVideo}`}
+      />
+    </>
   );
 }
 

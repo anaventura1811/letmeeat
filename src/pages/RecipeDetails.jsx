@@ -6,6 +6,7 @@ import useRecipes from '../hooks/UseRecipes';
 import Container from '../styles/recipeDetails';
 import RecipeIngredients from '../components/RecipeIngredients';
 import RecipeInstructions from '../components/RecipeInstructions';
+import MealVideo from '../components/MealVideo';
 
 const endpointRecipes = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 const endpointCocktails = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
@@ -52,9 +53,9 @@ function RecipeDetails({ type }) {
 	}
 
   const isAlchooholic = singleRecipe.strAlcoholic || '';
-	// const magicNumber = 32;
-	// const youTubeVideo = singleRecipe.strYoutube || '';
-	// const recipeMealName = singleRecipe.strMeal;
+	const magicNumber = 32;
+	const youTubeVideo = singleRecipe.strYoutube || '';
+	const recipeMealName = singleRecipe.strMeal;
 	const recipeThumb = singleRecipe.strMealThumb || singleRecipe.strDrinkThumb;
 	const recipeCategory = singleRecipe.strCategory;
 	const recipeName = type === 'meals' ? singleRecipe.strMeal : singleRecipe.strDrink;
@@ -72,6 +73,12 @@ function RecipeDetails({ type }) {
       <StarRating />
       <RecipeIngredients recipe={ singleRecipe } />
       <RecipeInstructions recipe={ singleRecipe } />
+      { type === 'meals' ? (
+        <MealVideo
+          youTubeVideo={ youTubeVideo.substring(magicNumber) }
+          title={ recipeMealName }
+        />
+      ) : ''}
     </Container>
   )
 }

@@ -1,9 +1,13 @@
-import React from 'react'
+import React from 'react';
+import StarRating from '../components/StarRating';
 
 function RecipeDetails() {
   return (
     <div>
-      Detalhes da receita
+      <h1>
+        Detalhes da receita
+      </h1>
+    <StarRating />
     </div>
   )
 }

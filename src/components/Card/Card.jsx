@@ -1,5 +1,6 @@
 import React from 'react';
 import CardContainer from './styles';
+// import StarRating from '../StarRating';
 
 function Card({ index, recipe }) {
   const recipeCategory = recipe.strAlcoholic || recipe.strCategory;
@@ -21,7 +22,6 @@ function Card({ index, recipe }) {
 						<p>{recipeCategory}</p>
 					</div>
 					<div className='rating'>
-						
 					</div>
 				</div>
 			</div>

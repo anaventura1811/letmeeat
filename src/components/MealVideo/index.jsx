@@ -17,7 +17,7 @@ function MealVideo({ youTubeVideo, title }) {
       type="text/html"
       width="640"
       height="360"
-      src={ `http://www.youtube.com.embed/${youTubeVideo}`}
+      src={ `http://www.youtube.com/embed/${youTubeVideo}`}
     />
   );
 }
@@ -27,3 +27,5 @@ MealVideo.propTypes = {
 	youTubeVideo: PropTypes.string,
 	title: PropTypes.string,
 }.isRequired;
+
+// API YouTube: https://developers.google.com/youtube/player_parameters?hl=pt-br

@@ -6,7 +6,7 @@ import useRecipes from '../hooks/UseRecipes';
 
 function RecipeInProgress({ type }) {
   const { id } = useParams();
-  const history = useHistory();
+  // const history = useHistory();
   const endpointMeal = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
 	const endpointDrink = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
   const [recipe, setRecipe] = useState({});

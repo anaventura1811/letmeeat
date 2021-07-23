@@ -6,7 +6,7 @@ import Container from './styles';
 function RecipeIngredientsInProgress({ recipe, type, id }) {
   const [checkedBox, setCheckedBox] = useState([]);
 
-  const { recipeInProgress, setRecipeInProgress, setIsDisabled } = useRecipes();
+  const { recipeInProgress, setRecipeInProgress } = useRecipes();
 
   const keysAndValues = Object.entries(recipe);
   const formatting = formattingMeasuresAndIngredients(keysAndValues);

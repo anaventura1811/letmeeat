@@ -1,26 +1,69 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useCallback } from 'react';
 // import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 
 export const RecipesContext = createContext({});
 
 const MAX_RECIPES = 18;
+const MAX_LENGTH = 6;
+
 function RecipesContextProvider(props) {
-  const { children } = props;
+	const { children } = props;
 
-  const [filteredRecipes, setFilteredRecipes] = useState([]);
-  const [filteredDataType, setType] = useState({});
-  const [searchBarFilters, setSearchBarFilters] = useState([]);
+	const [filteredRecipes, setFilteredRecipes] = useState([]);
+	const [filteredDataType, setType] = useState({});
+	const [searchBarFilters, setSearchBarFilters] = useState([]);
 
-  const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(true);
 
-  const [fetchRecipesContext, setFetchRecipesContext] = useState({});
+	const [fetchRecipesContext, setFetchRecipesContext] = useState({});
 
-  const [inputSearch, setInputSearch] = useState('');
+	const [inputSearch, setInputSearch] = useState('');
 	const [radioValue, setRadioValue] = useState('');
 
-  const fetchFilteredMealRecipes = async (endpoint, type) => {
-    try {
+	const [recipeData, setRecipe] = useState({}); // a receita da pg detalhes
+	const [recommendations, setRecomendations] = useState([]);
+	const [isRecommended, setIsRecommended] = useState(false);
+
+	// contexto receitas em progresso
+	const [isDisabled, setIsDisabled] = useState(true);
+	const [recipeInProgress, setRecipeInProgress] = useState();
+
+
+  const handleFetch = useCallback(async (url, type) => {
+	  try {
+		  const request = await fetch(url);
+		  const data = await request.json();
+		  if (data) setRecipe(data[type][0]);
+		// console.log(data[type]);
+		  setIsLoading(false);
+	  } catch (err) {
+		console.log(err);
+	  }
+  }, []);
+
+  const fetchMealRecipes = useCallback(async (endpoint, type) => {
+		// const currRecomendation = type === 'meals' ? 'drinks' : 'meals';
+		let currentRecommendation = '';
+		if (type === 'meals') currentRecommendation = 'drinks';
+		if (type === 'drinks') currentRecommendation = 'meals';
+		try {
+			const response = await fetch(endpoint);
+			const data = await response.json();
+			const formattingData = {
+				...data,
+				[currentRecommendation]: data[currentRecommendation].slice(0, MAX_LENGTH),
+			};
+			if (formattingData[currentRecommendation] !== null) {
+				setRecomendations(formattingData[currentRecommendation]);
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	}, []);
+
+	const fetchFilteredMealRecipes = async (endpoint, type) => {
+		try {
 			const response = await fetch(endpoint);
 			const data = await response.json();
 			const formattedData = {
@@ -31,8 +74,8 @@ function RecipesContextProvider(props) {
 			setType(formattedData);
 			setFilteredRecipes(formattedData[type]);
 		} catch (err) {
-      console.log(err);
-      toast.error('Sorry, no recipe found', {
+			console.log(err);
+			toast.error('Sorry, no recipe found', {
 				position: 'top-center',
 				autoClose: 5000,
 				hideProgressBar: false,
@@ -40,10 +83,10 @@ function RecipesContextProvider(props) {
 				pauseOnHover: true,
 				draggable: true,
 			});
-    }
-  };
+		}
+	};
 
-  const alertMessage = () => {
+	const alertMessage = () => {
 		toast.error('Your search must have only one(1) character', {
 			position: 'top-center',
 			autoClose: 5000,
@@ -54,13 +97,13 @@ function RecipesContextProvider(props) {
 		});
 	};
 
-  const handleMealFilterType = (filterType, query, type) => {
-    const trimSpacesQuery = query.replace(/\s/g, '').trim();
-    const endpointMealIngr = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${trimSpacesQuery}`;
+	const handleMealFilterType = (filterType, query, type) => {
+		const trimSpacesQuery = query.replace(/\s/g, '').trim();
+		const endpointMealIngr = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${trimSpacesQuery}`;
 		const endpointMealName = `https://www.themealdb.com/api/json/v1/1/search.php?s=${trimSpacesQuery}`;
 		const endpointMealFirstLetter = `https://www.themealdb.com/api/json/v1/1/search.php?f=${trimSpacesQuery}`;
 
-    switch (filterType) {
+		switch (filterType) {
 			case 'ingredient':
 				fetchFilteredMealRecipes(endpointMealIngr, type);
 				break;
@@ -77,9 +120,9 @@ function RecipesContextProvider(props) {
 			default:
 				break;
 		}
-  }
+	};
 
-  const handleDrinksFilterType = (filterType, query, type) => {
+	const handleDrinksFilterType = (filterType, query, type) => {
 		const trimSpacesQuery = query.replace(/\s/g, '').trim();
 		const encodeQuery = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${query}`;
 		const cocktailEndpointName = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${trimSpacesQuery}`;
@@ -105,7 +148,7 @@ function RecipesContextProvider(props) {
 		}
 	};
 
-  const getFilteredRecipes = (type) => {
+	const getFilteredRecipes = (type) => {
 		if (searchBarFilters.length > 0) {
 			console.log(searchBarFilters);
 			searchBarFilters.forEach((item) => {
@@ -122,7 +165,7 @@ function RecipesContextProvider(props) {
 		}
 	};
 
-  const contextValue = {
+	const contextValue = {
 		filteredRecipes,
 		filteredDataType,
 		setFilteredRecipes,
@@ -138,13 +181,19 @@ function RecipesContextProvider(props) {
 		setInputSearch,
 		radioValue,
 		setRadioValue,
+		handleFetch,
+		recipeData,
+		recommendations,
+		fetchMealRecipes,
+		isRecommended,
+		setIsRecommended,
+		isDisabled,
+		setIsDisabled,
+		recipeInProgress,
+		setRecipeInProgress,
 	};
 
-  return (
-    <RecipesContext.Provider value={ contextValue }>
-      { children }
-    </RecipesContext.Provider>
-  )
+	return <RecipesContext.Provider value={contextValue}>{children}</RecipesContext.Provider>;
 }
 
 export default RecipesContextProvider;

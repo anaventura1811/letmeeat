@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
-import shareIconImg from '../../images/shareIcon.svg';
-import favoriteIconImg from '../../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../../images/blackHeartIcon.svg';
+import { FaHeart } from 'react-icons/fa';
+import { FiShare2 } from 'react-icons/fi';
 import handleSetFavoritesToLocalStorage from '../../helpers/localStorageService';
 
 import { getCopyToClipboard } from '../../helpers/helperFunctions';
@@ -80,19 +79,15 @@ function RecipeInfo(props) {
 				</div>
 				<div className='icons'>
 					{copyToClipboard ? <span>Copied!</span> : ''}
-					<input
-						type='image'
-						src={shareIconImg}
-						alt='ícone de compartilhar'
-						data-testid='share-btn'
+					<FiShare2
+						size={30}
+						color={copyToClipboard ? 'green' : ''}
 						onClick={handleCopyToClipboard}
+						data-testid='share-btn'
 					/>
-
-					<input
-						type='image'
-						src={isFavorite ? blackHeartIcon : favoriteIconImg}
-						alt='ícone de favoritar'
-						data-testid='favorite-btn'
+					<FaHeart
+						size={30}
+						color={isFavorite ? 'red' : '#e4e5e9'}
 						onClick={handleAddFavoriteRecipe}
 					/>
 				</div>

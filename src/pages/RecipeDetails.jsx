@@ -8,6 +8,7 @@ import RecipeIngredients from '../components/RecipeIngredients';
 import RecipeInstructions from '../components/RecipeInstructions';
 import MealVideo from '../components/MealVideo';
 import Carousel from '../components/Carousel';
+import InitOrContinueButton from '../components/InitOrContinueButton';
 
 const endpointRecipes = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 const endpointCocktails = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
@@ -80,6 +81,7 @@ function RecipeDetails({ type }) {
 				''
 			)}
 			<Carousel recipeRecommendations={recommendations} type={ type } />
+      <InitOrContinueButton type={ type } />
 		</Container>
 	);
 }

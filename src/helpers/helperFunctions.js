@@ -1,4 +1,6 @@
 import useRecipes from "../hooks/UseRecipes";
+import format from 'date-fns/format';
+import ptBR from 'date-fns/locale/pt-BR';
 
 export default function useReset() {
 
@@ -47,3 +49,9 @@ export const getCopyToClipboard = (type, id) => {
 	}
 	navigator.clipboard.writeText(`${url}${id}`);
 };
+
+export const currentDate = format(new Date(), 'd MMM yyyy', {
+  locale: ptBR,
+});
+
+// Source - lib de datas: https://date-fns.org/v1.28.5/docs/format

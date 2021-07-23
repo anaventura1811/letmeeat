@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import RecipeInfo from '../components/RecipeInfo';
+import RecipeIngredientsInProgress from '../components/RecipeIngredientsInProgress';
 import useRecipes from '../hooks/UseRecipes';
 
 function RecipeInProgress({ type }) {
@@ -9,7 +10,7 @@ function RecipeInProgress({ type }) {
   const endpointMeal = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
 	const endpointDrink = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
   const [recipe, setRecipe] = useState({});
-  const { handleFetch, isLoading, recipeData, recommendations, fetchMealRecipes } = useRecipes();
+  const { handleFetch, isLoading, recipeData, fetchMealRecipes } = useRecipes();
 
 
 
@@ -18,15 +19,17 @@ function RecipeInProgress({ type }) {
 		if (cancel) return;
 		const getRecipe = () => {
 			if (type === 'meals') {
-				return handleFetch(endpointMeal, type);
+				 handleFetch(endpointMeal, type);
+         return setRecipe(recipeData);
 			}
-			return handleFetch(endpointDrink, type);
+			handleFetch(endpointDrink, type);
+      return setRecipe(recipeData);
 		};
 		getRecipe();
 		return () => {
 			cancel = true;
 		};
-	}, [endpointDrink, endpointMeal, fetchMealRecipes, handleFetch, type]);
+	}, [endpointDrink, endpointMeal, fetchMealRecipes, handleFetch, recipeData, type]);
 
 
   if (isLoading) {
@@ -47,6 +50,11 @@ function RecipeInProgress({ type }) {
         type={ type }
         recipe={ recipe }
         recipeCategory={ renderCategory }
+      />
+      <RecipeIngredientsInProgress
+        recipe={ recipe }
+        type={ type }
+        id={ id }
       />
     </div>
   )

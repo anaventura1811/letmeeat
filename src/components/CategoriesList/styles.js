@@ -1,50 +1,28 @@
 import styled from 'styled-components';
 
 const CategoriesListContainer = styled.div`
-	align-items: center;
+	align-self: center;
 	display: flex;
-	flex-wrap: wrap;
-	gap: 0.5rem;
-	justify-content: space-evenly;
-	margin: 10px auto;
+	margin: 0 auto;
 	max-width: 600px;
-	padding: 0 12px;
-	/* overflow-x: auto; */
+	padding: 15px 30px 15px 15px;
 
-	button {
-		align-items: center;
+	select {
+    align-self: center;
+    align-content: center;
 		background: #289ea8;
 		border: 0;
-		border-radius: 8px;
 		color: white;
-		cursor: pointer;
-		display: flex;
 		font-family: Poppins, sans-serif;
-		font-weight: 500;
-		height: 2.5rem;
-		justify-content: center;
-		margin-top: auto;
-		max-width: 300px;
-		min-width: 125px;
-		padding: 0 32px;
-		text-transform: lowercase;
+		font-size: 1rem;
+		margin: 0 auto;
+		padding: 10px;
+    text-align: center;
+		width: 100%;
 
-		& + button {
-			margin-top: 0.5rem;
+		option {
+			background: #ebf4f2;
 		}
 	}
-
-	@media only screen and (max-width: 560px) {
-		max-width: 500px;
-	}
-
-	@media only screen and (min-width: 600px) {
-		gap: 0.3rem;
-		margin-top: 20px;
-		max-width: 1000px;
-		min-width: 300px;
-		padding: 0;
-	}
 `;
-
 export default CategoriesListContainer;

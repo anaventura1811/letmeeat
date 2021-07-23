@@ -10,6 +10,7 @@ const MAX_CATEGORIES = 6;
 function CategoriesList({ type }) {
   const fetchCategoriesURL = type === 'meals' ? mealsCategoriesEndpoint : drinksCategoriesEndpoint;
   const [, setFetchUrl] = useFetchRecipes(type);
+  const [selectCategoryValue, setSelectCategoryValue] = useState('Choose');
   const [categories, setCategories] = useState([]);
   const [lastCategoryClicked, setLastCategoryClicked] = useState('');
 
@@ -29,16 +30,18 @@ function CategoriesList({ type }) {
     }
   }, [fetchCategoriesURL, type]);
 
-  const handleCategoryClick = (category) => {
-    if (lastCategoryClicked !== category && category !== 'All') {
+  const handleDropDownChange = (event) => {
+    const { target: { value } } = event;
+     setSelectCategoryValue(value);
+    if (lastCategoryClicked !== value && value !== 'All') {
       const fetchRecipesByCategoryUrl = type === 'meals'
 					? 'https://www.themealdb.com/api/json/v1/1/filter.php?c='
 					: 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=';
-      setLastCategoryClicked(category);
-      return setFetchUrl(`${fetchRecipesByCategoryUrl}${category}`);
+      setLastCategoryClicked(value);
+      return setFetchUrl(`${fetchRecipesByCategoryUrl}${value}`);
     }
 
-    if (category === 'All') {
+    if (value === 'All') {
       setLastCategoryClicked('All');
     } else {
       setLastCategoryClicked('');
@@ -53,7 +56,20 @@ function CategoriesList({ type }) {
 
   return (
     <CategoriesListContainer>
-      { categories.map((category, index) => (
+      <select value={ selectCategoryValue} onChange={ handleDropDownChange }>
+        <option disabled hidden value="Choose">Find recipes by category</option>
+        { categories.map((category, index) => (
+          <option
+            key={ index }
+            value={ category }
+            data-testid={ `${category}-category-filter`}
+          >
+            { category }
+          </option>
+        ))}
+        <option data-testid="All-category-filter" value="All">All</option>
+      </select>
+      {/* { categories.map((category, index) => (
         <button
           type="button"
           data-testid={ `${category}-category-filter` }
@@ -69,7 +85,7 @@ function CategoriesList({ type }) {
         onClick={ () => handleCategoryClick('All') }
       >
         All
-      </button>
+      </button> */}
       
     </CategoriesListContainer>
   )

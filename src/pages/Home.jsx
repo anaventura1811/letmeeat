@@ -51,19 +51,7 @@ function Home({ type }) {
 					<ImSearch size={30} />
 				</button>
 			</Header>
-			{isActive ? (
-				<SearchBar type={type} />
-			) : type === 'meals' ? (
-        <div className="categories-container">
-          <h2>What is your favorite type of meal?</h2>
-          <CategoriesList type={type} />
-        </div>
-			) : (
-        <div className="categories-container">
-          <h2>What are your favorite drinks?</h2>
-          <CategoriesList type={type} />
-        </div>
-			)}
+			{isActive ? (<SearchBar type={type} />) : (<CategoriesList type={type} />)}
 			<CardList recipes={recipes} type={type} />
 			<Footer />
 		</Container>

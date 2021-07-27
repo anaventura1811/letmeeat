@@ -3,6 +3,7 @@ import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { render } from '@testing-library/react';
 import UserContextProvider from '../contexts/UserContext';
+import RecipesContextProvider from '../contexts/RecipesContext';
 
 
 const renderWithRouterAndProvider = async (component, route = '/') => {
@@ -13,7 +14,9 @@ const renderWithRouterAndProvider = async (component, route = '/') => {
 		...render(
 			<Router history={history}>
         <UserContextProvider>
-				  {component}
+					<RecipesContextProvider>
+				  	{component}
+					</RecipesContextProvider>
         </UserContextProvider>
 			</Router>
 		),
